@@ -1,8 +1,6 @@
-# All Products Unicenta
+# Consultas Armando  
 
-## Steps
 
-    1. Rename config-example.php for config.php and change vars
 
 
 ## @Author Armando Rojas <armando.develop@gmail.com>

@@ -2,6 +2,8 @@
  * @author Armando Rojas <armando.develop@gmail.com>
  * @github: https://github.com/dev-armando
  */
+
+ 
 var vue_instance = new Vue({
   el: "#app",
   components: {},
@@ -16,10 +18,19 @@ var vue_instance = new Vue({
       this.message = "Esperando codigo de Barras";
     });
   },
+  mounted(){
+    setInterval( ()=>{
+      this.getFocus();
+    }, 1000)
+   
+   },
   methods: {
     callDebounceCode: _.debounce(function () {
       this.getProduct();
     }, 500),
+    async getFocus(){
+      this.$refs.forFocus.focus();
+    },
     async getProduct() {
       try {
         this.loading = true;
@@ -45,6 +56,12 @@ var vue_instance = new Vue({
         else{
           this.message = "Producto encontrado";
           this.code = "";
+
+          setTimeout( () => {
+            JsBarcode("#code", this.product[0].code );
+          } , 100)
+         
+
         } 
       } catch (err) {
         this.loading = false;
@@ -62,4 +79,5 @@ var vue_instance = new Vue({
       this.code = "";
     },
   }, //methods
+
 });

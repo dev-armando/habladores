@@ -1,0 +1,8 @@
+:root{
+
+    --bg-primary : #f8f9fa; 
+}
+
+body {
+    background: var(--bg-primary);
+}

@@ -4,9 +4,10 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>All Producst</title>
+    <title>Consultas Armando</title>
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/sweetalert2.min.css" />
+    <link rel="stylesheet" href="css/main.css">
   </head>
 
   <body>
@@ -24,44 +25,34 @@
             placeholder=""
             @input="callDebounceCode()"
             v-model="code"
+            ref="forFocus"
           />
           <small id="helpId" class="form-text text-muted">{{ message }}</small>
         </div>
-        <input
-          name=""
-          id=""
-          class="btn btn-danger"
-          type="button"
-          value="Limpiar Campo"
-          v-on:click="clearForm()"
-        />
+     
         <hr />
         <div class="container" v-if="product.length > 0">
           <div class="row">
-            <div class="col-4 offset-4">
+            <div class="col-12">
               <div class="mb-3">
                 <div class="card">
                   <div class="card-body">
-                    <h5 class="card-title text-center">
+                    <h1 class="card-title text-center mt-4 mb-5">
                       {{ product[0].name }}
-                    </h5>
+                    </h1>
                     <div align="center">
-                      <img
-                        class="img-responsive"
-                        src="data:image/png;base64,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"
-                        alt=""
-                      />
+                      <img id="code"/>
                     </div>
-                    <div class="row">
+                    <div class="row mt-5">
                       <div class="col-6">
-                        <h6 class="card-text text-center">
+                        <h3 class="card-text text-center">
                           Precio: {{ product[0].pricesell }} Bs.
-                        </h6>
+                        </h3>
                       </div>
                       <div class="col-6">
-                        <h6 class="card-text text-center">
+                        <h3 class="card-text text-center">
                           Ref: {{ product[0].priceusdsale }}
-                        </h6>
+                        </h3>
                       </div>
                     </div>
                   </div>
@@ -78,6 +69,7 @@
     <script src="./js/lodash.min.js"></script>
     <script src="./js/vue-meta.js"></script>
     <script src="./js/sweetalert2.all.min.js"></script>
+    <script src="./js/JsBarcode.all.min.js"></script>
     <script src="./js/products.js"></script>
   </body>
 </html>

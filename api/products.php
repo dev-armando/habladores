@@ -9,7 +9,7 @@ $db = require('Database.php');
 
 $code = $_REQUEST['code'] ?? '0'; 
 
-$products = $db->execute("select * from products where code = :code " , [ 'code' => $code  ] );
+$products = $db->execute("select name , priceusdsale , pricesell , code from products where code = :code " , [ 'code' => $code  ] );
 
  echo json_encode(['data' => $products]);
 
