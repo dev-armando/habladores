@@ -2,8 +2,6 @@
  * @author Armando Rojas <armando.develop@gmail.com>
  * @github: https://github.com/dev-armando
  */
-
- 
 var vue_instance = new Vue({
   el: "#app",
   components: {},
@@ -18,17 +16,16 @@ var vue_instance = new Vue({
       this.message = "Esperando codigo de Barras";
     });
   },
-  mounted(){
-    setInterval( ()=>{
+  mounted() {
+    setInterval(() => {
       this.getFocus();
-    }, 1000)
-   
-   },
+    }, 1000);
+  },
   methods: {
     callDebounceCode: _.debounce(function () {
       this.getProduct();
     }, 500),
-    async getFocus(){
+    async getFocus() {
       this.$refs.forFocus.focus();
     },
     async getProduct() {
@@ -37,9 +34,8 @@ var vue_instance = new Vue({
         let filters = {
           page: this.page,
         };
- 
-        filters.code = this.code;
 
+        filters.code = this.code;
         const response = await axios({
           method: "Get",
           responseType: "json",
@@ -49,24 +45,20 @@ var vue_instance = new Vue({
         this.loading = false;
         this.product = response.data.data;
 
-        if (this.product.length < 1){
+        if (this.product.length < 1) {
           this.message = "Producto no encontrado";
           this.code = "";
-        }
-        else{
+        } else {
           this.message = "Producto encontrado";
           this.code = "";
 
-          setTimeout( () => {
-            JsBarcode("#code", this.product[0].code );
-          } , 100)
-         
-
-        } 
+          setTimeout(() => {
+            JsBarcode("#code", this.product[0].code);
+          }, 100);
+        }
       } catch (err) {
         this.loading = false;
         console.log(err);
-
         Swal.fire({
           title: "Error",
           text: "Ha ocurrido un error mientras se realizaba la consulta",
@@ -74,10 +66,8 @@ var vue_instance = new Vue({
         });
       }
     },
-
     clearForm() {
       this.code = "";
     },
   }, //methods
-
 });
