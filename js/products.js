@@ -53,7 +53,11 @@ var vue_instance = new Vue({
           this.code = "";
 
           setTimeout(() => {
-            JsBarcode("#code", this.product[0].code);
+            JsBarcode("#code", this.product[0].code, {
+              width: 3,
+              height: 30,
+              
+            });
           }, 100);
         }
       } catch (err) {
@@ -69,5 +73,26 @@ var vue_instance = new Vue({
     clearForm() {
       this.code = "";
     },
+    roundNumberToTwoDecimal(num) {
+      let m = Number((Math.abs(num) * 100).toPrecision(15));
+      return Math.round(m) / 100 * Math.sign(num);
+    },
+    formatNumber(  currency ,  amount ){
+   
+      let type = '';
+  
+      if(currency == 'USD'){
+       
+          type = 'en';
+      }
+  
+      if(currency == 'VED'){
+       
+          type = 'es-VE'
+      }
+  
+      return  new Intl.NumberFormat(type).format( this.roundNumberToTwoDecimal( amount));
+  
+  },
   }, //methods
 });
